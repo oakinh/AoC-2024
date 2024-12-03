@@ -5,8 +5,9 @@
 #include <fstream>
 #include <algorithm>
 #include <cctype>
+#include <cmath>
 
-void findTotalDistance() {
+std::pair<std::vector<int>, std::vector<int>> readAndSplit() {
     std::ifstream inputFile("DayOne/input.txt");
     if (!inputFile) {
         std::cerr << "Error opening file. \n";
@@ -30,21 +31,69 @@ void findTotalDistance() {
     }
     inputFile.close();
 
-    std::cout << "List 1: ";
-    for (int num : list1) {
-        std::cout << num << " ";
-    }
-    std::cout << "\n";
+    return {list1, list2};
+}
 
-    std::cout << "List 2: ";
-    for (int num : list2) {
-        std::cout << num << " ";
+int findTotalDistance(std::vector<int>list1, std::vector<int>list2) {
+    std::sort(list1.begin(), list1.end());
+    std::sort(list2.begin(), list2.end());
+
+    int totalDistance = 0;
+
+    for (int i = 0; i < list1.size(); i++) {
+        int distance = std::abs(list1[i] - list2[i]);
+        totalDistance += distance;
     }
-    std::cout << "\n";
+    
+    std::cout << "Total distance is " << totalDistance << std::endl;
+
+    return totalDistance;
+}
+
+int calculateSimilarityScore(std::vector<int>left, std::vector<int>right) {
+    // Inputs are sorted
+    std::unordered_map<int, int> leftMap;
+    std::unordered_map<int, int> rightMap;
+
+    for (int i = 0; i < left.size(); i++) {
+        leftMap[left[i]]++;
+        rightMap[right[i]]++;
+    }
+
+    int similarityScore = 0;
+
+    for (const auto& pair : leftMap) {
+        int key = pair.first;
+
+        if (rightMap.find(key) != rightMap.end()) {
+            similarityScore += key * leftMap[key] * rightMap[key];
+        }
+    }
+
+    std::cout << "Similarity Score: " << similarityScore << std::endl;
+
+    return similarityScore;
+
+    // std::cout << "Left map has: ";
+    // for (const auto& pair : leftMap) {
+    //     std::cout << "{" << pair.first << ": " << pair.second << "} ";
+    // }
+    // std::cout << std::endl;
+
+    // // Print rightMap
+    // std::cout << "Right map has: ";
+    // for (const auto& pair : rightMap) {
+    //     std::cout << "{" << pair.first << ": " << pair.second << "} ";
+    // }
+    // std::cout << std::endl;
+
 }
 
 int main() {
-    findTotalDistance();
+    auto [list1, list2] = readAndSplit();
+    int totalDistance = findTotalDistance(list1, list2);
+    calculateSimilarityScore(list1, list2);
+
 
     return 0;
 }
