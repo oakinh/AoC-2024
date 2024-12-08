@@ -34,7 +34,7 @@ std::pair<std::vector<int>, std::vector<int>> readAndSplit() {
     return {list1, list2};
 }
 
-int findTotalDistance(std::vector<int>list1, std::vector<int>list2) {
+int findTotalDistance(const std::vector<int>& list1, const std::vector<int>& list2) {
     std::sort(list1.begin(), list1.end());
     std::sort(list2.begin(), list2.end());
 
