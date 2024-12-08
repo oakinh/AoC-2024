@@ -12,18 +12,10 @@ enum class LevelProgression {
 
 bool isLineSafe(const std::vector<int>& values, std::size_t lineNumber, bool dampenerOn) {
     if (values.size() < 2) {
-        //std::cerr <<"Line " << lineNumber << " does not have enough values." << std::endl;
         return true;
     }
 
     LevelProgression prog;
-
-    // if (values[0] < values[1]) {
-    //     prog = LevelProgression::Increasing;
-    // } else if (values[0] > values[1]) {
-    //     prog = LevelProgression::Decreasing;
-    // }
-
     
     if (values[0] < values[1]) {
         prog = LevelProgression::Increasing;
