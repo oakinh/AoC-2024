@@ -8,7 +8,7 @@
 #include <cmath>
 
 std::pair<std::vector<int>, std::vector<int>> readAndSplit() {
-    std::ifstream inputFile("DayOne/input.txt");
+    std::ifstream inputFile("day_one/input.txt");
     if (!inputFile) {
         std::cerr << "Error opening file. \n";
         // return 1;

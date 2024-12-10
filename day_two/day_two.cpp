@@ -67,7 +67,7 @@ bool isLineSafe(const std::vector<int>& values, std::size_t lineNumber, bool dam
 }
 
 int main() {
-    std::ifstream inputFile("DayTwo/input.txt");
+    std::ifstream inputFile("day_two/input.txt");
     if (!inputFile.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
         return 1;
